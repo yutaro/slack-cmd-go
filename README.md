@@ -4,6 +4,13 @@ Making slack-bot perseing your messages like cli commands.
 
 ## Usage
 
+install
+```sh
+go get -u github.com/yutaro/slack-cmd-go
+```
+
+
+example
 ```go
 package main
 
