@@ -46,9 +46,9 @@ func (b *Bot) NewCmds(name string) *CmdGroup {
 
 func (b *Bot) OneCmd(name, explain string, callback func(*Context)) {
 	b.Cmds[name] = make(map[string]*Cmd)
-	b.Cmds[name][" "] = &Cmd{
+	b.Cmds[name]["___"] = &Cmd{
 		name:    name,
-		label:   " ",
+		label:   "___",
 		explain: explain,
 		run:     callback,
 	}
@@ -98,7 +98,7 @@ func (b *Bot) evalMes(ev *slack.MessageEvent) {
 		return
 	}
 
-	if cmd, ok := group[""]; ok {
+	if cmd, ok := group["___"]; ok {
 		c.args = args[1:]
 		cmd.run(c)
 		return
