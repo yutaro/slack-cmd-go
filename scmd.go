@@ -31,9 +31,9 @@ func New(key string) *Bot {
 	go rtm.ManageConnection()
 
 	return &Bot{
-		api: api,
-		rtm: rtm,
-		Cmds : make(map[string]map[string]*Cmd),
+		api:  api,
+		rtm:  rtm,
+		Cmds: make(map[string]map[string]*Cmd),
 	}
 }
 
@@ -46,9 +46,9 @@ func (b *Bot) NewCmds(name string) *CmdGroup {
 
 func (b *Bot) OneCmd(name, explain string, callback func(*Context)) {
 	b.Cmds[name] = make(map[string]*Cmd)
-	b.Cmds[name][""] = &Cmd{
+	b.Cmds[name][" "] = &Cmd{
 		name:    name,
-		label:   "",
+		label:   " ",
 		explain: explain,
 		run:     callback,
 	}
