@@ -38,7 +38,7 @@ func New(key string) *Bot {
 }
 
 func (b *Bot) NewCmds(name string) *CmdGroup {
-	b.Cmds = make(map[string]*Cmd)
+	b.Cmds[name] = make(map[string]*Cmd)
 	return &CmdGroup{
 		name: name,
 		Bot:  *b,
