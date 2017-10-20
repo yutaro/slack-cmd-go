@@ -11,7 +11,19 @@ import(
 
 func main(){
     bot := scmd.New("--- YOUR API KEY ---")
-    calc := bot.NewCmd("calc")
+
+    hello := bot.OneCmd("hello", "greeting",
+    func(c scmd.Context){
+        args := GetArgs()
+        if len(args) == 0 {
+            c.SendMessage("Hello!")
+            return
+        }
+        c.SendMessage(fmt.Sprintf("Hello %s!", strings.Join(args, " ")))
+    })
+
+
+    calc := bot.NewCmds("calc")
 
     calc.Action("sum", "Add two numbers.",
         func(c scmd.Context){
