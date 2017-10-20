@@ -9,7 +9,8 @@ import (
 )
 
 func main() {
-	bot := scmd.New("--- YOUR API KEY ---")
+	conf := scmd.LoadToml("config.toml")
+	bot := scmd.New(conf.TOKEN)
 
 	bot.OneCmd("hello", "greeting",
 		func(c *scmd.Context) {
