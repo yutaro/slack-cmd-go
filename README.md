@@ -19,7 +19,7 @@ func main() {
     bot := scmd.New("--- YOUR API KEY ---")
 
     hello := bot.OneCmd("hello", "greeting",
-        func(c scmd.Context) {
+        func(c *scmd.Context) {
             args := GetArgs()
             if len(args) == 0 {
                 c.SendMessage("Hello!")
@@ -30,7 +30,7 @@ func main() {
 
     calc := bot.NewCmds("calc")
     calc.Cmd("sum", "Add two numbers.",
-        func(c scmd.Context) {
+        func(c *scmd.Context) {
             args := c.GetArgs()
             x, _ := strconv.Atoi(args[0])
             y, _ := strconv.Atoi(args[1])
@@ -38,7 +38,7 @@ func main() {
         })
 
     calc.Cmd("fib", "Show fibonacci numbers.",
-        func(c scmd.Context) {
+        func(c *scmd.Context) {
             args := c.GetArgs()
             x, _ := strconv.ParseInt(args[0])
 
