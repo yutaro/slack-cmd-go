@@ -2,6 +2,8 @@
 
 Making slack-bot perseing your messages like cli commands.
 
+## Usage
+
 ```go
 package main
 
@@ -62,3 +64,6 @@ func fibonacci() func() int {
 }
 
 ```
+
+## Library
+<https://github.com/nlopes/slack>
