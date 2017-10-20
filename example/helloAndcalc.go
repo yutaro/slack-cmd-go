@@ -12,6 +12,9 @@ func main() {
 	conf := scmd.LoadToml("config.toml")
 	bot := scmd.New(conf.TOKEN)
 
+	// just one phrase command.
+	// hello => Hello!
+	// hello yutaro => Hello yutaro!
 	bot.OneCmd("hello", "greeting",
 		func(c *scmd.Context) {
 			args := c.GetArgs()
@@ -22,8 +25,10 @@ func main() {
 			c.SendMessage(fmt.Sprintf("Hello %s!", strings.Join(args, " ")))
 		})
 
+	// two phrase command
 	calc := bot.NewCmds("calc")
 
+	// calc sum 2 3 => The result is : 5
 	calc.Cmd("sum", "Add two numbers.",
 		func(c *scmd.Context) {
 			args := c.GetArgs()
@@ -32,6 +37,7 @@ func main() {
 			c.SendMessage(fmt.Sprintf("The result is : %d", x+y))
 		})
 
+	// calc sub 5 10 => The result is : -5
 	calc.Cmd("sub", "Sub two numbers.",
 		func(c *scmd.Context) {
 			args := c.GetArgs()
@@ -40,6 +46,7 @@ func main() {
 			c.SendMessage(fmt.Sprintf("The result is : %d", x-y))
 		})
 
+	// calc fib 5 => The result is : 1 1 2 3 5
 	calc.Cmd("fib", "Show fibonacci numbers.",
 		func(c *scmd.Context) {
 			args := c.GetArgs()

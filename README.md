@@ -8,64 +8,79 @@ Making slack-bot perseing your messages like cli commands.
 package main
 
 import (
-    "fmt"
-    "strconv"
-    "strings"
+	"fmt"
+	"strconv"
+	"strings"
 
-    "github.com/yutaro/slack-cmd-go"
+	"github.com/yutaro/slack-cmd-go"
 )
 
 func main() {
-    bot := scmd.New("--- YOUR API KEY ---")
+	conf := scmd.LoadToml("config.toml")
+	bot := scmd.New(conf.TOKEN)
 
-    hello := bot.OneCmd("hello", "greeting",
-        func(c *scmd.Context) {
-            args := c.GetArgs()
-            if len(args) == 0 {
-                c.SendMessage("Hello!")
-                return
-            }
-            c.SendMessage(fmt.Sprintf("Hello %s!", strings.Join(args, " ")))
-        })
+	// just one phrase command.
+	// hello => Hello!
+	// hello yutaro => Hello yutaro!
+	bot.OneCmd("hello", "greeting",
+		func(c *scmd.Context) {
+			args := c.GetArgs()
+			if len(args) == 0 {
+				c.SendMessage("Hello!")
+				return
+			}
+			c.SendMessage(fmt.Sprintf("Hello %s!", strings.Join(args, " ")))
+		})
 
-    calc := bot.NewCmds("calc")
-    calc.Cmd("sum", "Add two numbers.",
-        func(c *scmd.Context) {
-            args := c.GetArgs()
-            x, _ := strconv.Atoi(args[0])
-            y, _ := strconv.Atoi(args[1])
-            c.SendMessage(fmt.Sprintf("The result is : %d", x+y))
-        })
+	// two phrase command
+	calc := bot.NewCmds("calc")
 
-    calc.Cmd("fib", "Show fibonacci numbers.",
-        func(c *scmd.Context) {
-            args := c.GetArgs()
-            x, _ := strconv.ParseInt(args[0])
+	// calc sum 2 3 => The result is : 5
+	calc.Cmd("sum", "Add two numbers.",
+		func(c *scmd.Context) {
+			args := c.GetArgs()
+			x, _ := strconv.Atoi(args[0])
+			y, _ := strconv.Atoi(args[1])
+			c.SendMessage(fmt.Sprintf("The result is : %d", x+y))
+		})
 
-            nums := make(string, x)
-            f := fibbonacci()
-            for i := 0; i < x; i++ {
-                nums[x] = strconv.Itoa(f())
-            }
+	// calc sub 5 10 => The result is : -5
+	calc.Cmd("sub", "Sub two numbers.",
+		func(c *scmd.Context) {
+			args := c.GetArgs()
+			x, _ := strconv.Atoi(args[0])
+			y, _ := strconv.Atoi(args[1])
+			c.SendMessage(fmt.Sprintf("The result is : %d", x-y))
+		})
 
-            c.SendMessage(fmt.Sprintf("The result is : %s", strings.Join(nums, " ")))
-        })
+	// calc fib 5 => The result is : 1 1 2 3 5
+	calc.Cmd("fib", "Show fibonacci numbers.",
+		func(c *scmd.Context) {
+			args := c.GetArgs()
+			x, _ := strconv.Atoi(args[0])
 
-    bot.Start()
+			nums := make([]string, x)
+			f := fibonacci()
+			for i := 0; i < x; i++ {
+				nums[i] = strconv.Itoa(f())
+			}
+
+			c.SendMessage(fmt.Sprintf("The result is : %s", strings.Join(nums, " ")))
+		})
+
+	bot.Start()
 }
 
 func fibonacci() func() int {
-    fib1 := 0
-    fib2 := 1
-    return func() int {
-        fib := fib1 + fib2
-        fib1 = fib2
-        fib2 = fib
-        return fib1
-    }
+	fib1 := 0
+	fib2 := 1
+	return func() int {
+		fib := fib1 + fib2
+		fib1 = fib2
+		fib2 = fib
+		return fib1
+	}
 }
-
-
 ```
 
 ## Library
