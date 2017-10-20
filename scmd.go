@@ -2,6 +2,7 @@ package scmd
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/nlopes/slack"
 )
@@ -32,6 +33,7 @@ func New(key string) *Bot {
 	return &Bot{
 		api: api,
 		rtm: rtm,
+		Cmds : make(map[string]map[string]*Cmd),
 	}
 }
 
@@ -43,17 +45,19 @@ func (b *Bot) NewCmds(name string) *CmdGroup {
 }
 
 func (b *Bot) OneCmd(name, explain string, callback func(*Context)) {
-	b.Cmds[name][nil] = &Cmds{
+	b.Cmds[name] = make(map[string]*Cmd)
+	b.Cmds[name][""] = &Cmd{
 		name:    name,
-		label:   nil,
+		label:   "",
 		explain: explain,
 		run:     callback,
 	}
 }
 
 func (g *CmdGroup) Cmd(label, explain string, callback func(*Context)) {
-	g.Bot.Cmds[name][label] = &Cmd{
-		name:    name,
+	g.Bot.Cmds[g.name] = make(map[string]*Cmd)
+	g.Bot.Cmds[g.name][label] = &Cmd{
+		name:    g.name,
 		label:   label,
 		explain: explain,
 		run:     callback,
@@ -68,7 +72,7 @@ Loop:
 			switch ev := msg.Data.(type) {
 			case *slack.MessageEvent:
 				go b.evalMes(ev)
-			case *slack.RTmError:
+			case *slack.RTMError:
 				break Loop
 			case *slack.InvalidAuthEvent:
 				break Loop
@@ -80,7 +84,7 @@ Loop:
 
 func (b *Bot) evalMes(ev *slack.MessageEvent) {
 	msg := ev.Text
-	args := sgrings.Split(msg, " ")
+	args := strings.Split(msg, " ")
 
 	c := &Context{
 		rtm:     b.rtm,
@@ -88,24 +92,24 @@ func (b *Bot) evalMes(ev *slack.MessageEvent) {
 		rawArgs: args,
 	}
 
-	group, ok = b.Cmds[args[0]]
+	group, ok := b.Cmds[args[0]]
 	if !ok {
 		fmt.Printf("Not exist command group %s", args[0])
 		return
 	}
 
-	if cmd, ok = group[nil]; ok {
+	if cmd, ok := group[""]; ok {
 		c.args = args[1:]
 		cmd.run(c)
 		return
 	}
 
-	if cmd, ok = group[args[1]]; ok {
+	if cmd, ok := group[args[1]]; ok {
 		c.args = args[2:]
 		cmd.run(c)
 		return
 	} else {
-		fmt.Println("Not Exist command %s in %s", args[1], args[0])
+		fmt.Printf("Not Exist command %s in %s", args[1], args[0])
 		return
 	}
 
