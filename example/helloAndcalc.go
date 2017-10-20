@@ -11,7 +11,7 @@ import (
 func main() {
 	bot := scmd.New("--- YOUR API KEY ---")
 
-	hello := bot.OneCmd("hello", "greeting",
+	bot.OneCmd("hello", "greeting",
 		func(c *scmd.Context) {
 			args := c.GetArgs()
 			if len(args) == 0 {
