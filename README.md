@@ -11,7 +11,7 @@ import (
     "fmt"
     "strconv"
     "strings"
-    
+
     "github.com/yutaro/slack-cmd-go"
 )
 
@@ -19,8 +19,8 @@ func main() {
     bot := scmd.New("--- YOUR API KEY ---")
 
     hello := bot.OneCmd("hello", "greeting",
-        func(c *scmd.Context) {
-            args := GetArgs()
+        func(c *scmd.Context) {
+            args := c.GetArgs()
             if len(args) == 0 {
                 c.SendMessage("Hello!")
                 return
