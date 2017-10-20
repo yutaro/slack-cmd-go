@@ -94,7 +94,7 @@ func (b *Bot) evalMes(ev *slack.MessageEvent) {
 
 	group, ok := b.Cmds[args[0]]
 	if !ok {
-		fmt.Printf("Not exist command group %s", args[0])
+		//fmt.Printf("Not exist command group %s", args[0])
 		return
 	}
 
@@ -109,7 +109,7 @@ func (b *Bot) evalMes(ev *slack.MessageEvent) {
 		cmd.run(c)
 		return
 	} else {
-		fmt.Printf("Not Exist command %s in %s", args[1], args[0])
+		fmt.Printf("Not Exist command %s in %s\n", args[1], args[0])
 		return
 	}
 

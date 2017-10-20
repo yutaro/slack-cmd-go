@@ -32,6 +32,14 @@ func main() {
 			c.SendMessage(fmt.Sprintf("The result is : %d", x+y))
 		})
 
+	calc.Cmd("sub", "Sub two numbers.",
+		func(c *scmd.Context) {
+			args := c.GetArgs()
+			x, _ := strconv.Atoi(args[0])
+			y, _ := strconv.Atoi(args[1])
+			c.SendMessage(fmt.Sprintf("The result is : %d", x-y))
+		})
+
 	calc.Cmd("fib", "Show fibonacci numbers.",
 		func(c *scmd.Context) {
 			args := c.GetArgs()
@@ -40,7 +48,7 @@ func main() {
 			nums := make([]string, x)
 			f := fibonacci()
 			for i := 0; i < x; i++ {
-				nums[x] = strconv.Itoa(f())
+				nums[i] = strconv.Itoa(f())
 			}
 
 			c.SendMessage(fmt.Sprintf("The result is : %s", strings.Join(nums, " ")))
