@@ -29,7 +29,7 @@ func main() {
         })
 
     calc := bot.NewCmds("calc")
-    calc.GET("sum", "Add two numbers.",
+    calc.Cmd("sum", "Add two numbers.",
         func(c scmd.Context) {
             args := c.GetArgs()
             x, _ := strconv.Atoi(args[0])
@@ -37,7 +37,7 @@ func main() {
             c.SendMessage(fmt.Sprintf("The result is : %d", x+y))
         })
 
-    calc.GET("fib", "Show fibonacci numbers.",
+    calc.Cmd("fib", "Show fibonacci numbers.",
         func(c scmd.Context) {
             args := c.GetArgs()
             x, _ := strconv.ParseInt(args[0])
