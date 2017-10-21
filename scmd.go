@@ -99,8 +99,8 @@ func (b *Bot) evalMes(ev *slack.MessageEvent) {
 		return
 	}
 
-	for i, a := range args {
-		if a[0] == "-" {
+	for _, a := range args {
+		if a[0] == '-' {
 
 		}
 	}
