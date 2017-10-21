@@ -84,12 +84,13 @@ Loop:
 
 func (b *Bot) evalMes(ev *slack.MessageEvent) {
 	msg := ev.Text
+	rawArgs := strings.Split(msg, " ")
 	args := strings.Split(msg, " ")
 
 	c := &Context{
 		rtm:     b.rtm,
 		ev:      ev,
-		rawArgs: args,
+		rawArgs: rawArgs,
 	}
 
 	group, ok := b.Cmds[args[0]]
@@ -98,7 +99,13 @@ func (b *Bot) evalMes(ev *slack.MessageEvent) {
 		return
 	}
 
-	if cmd, ok := group[" "]; ok {
+	for i, a := range args {
+		if a[0] == "-" {
+
+		}
+	}
+
+	if cmd, ok := group[" "]; ok && len(args) == 1 {
 		c.args = args[1:]
 		cmd.run(c)
 		return
@@ -108,9 +115,12 @@ func (b *Bot) evalMes(ev *slack.MessageEvent) {
 		c.args = args[2:]
 		cmd.run(c)
 		return
+	} else if cmd, ok := group[" "]; ok {
+		c.args = args[1:]
+		cmd.run(c)
+		return
 	} else {
 		fmt.Printf("Not Exist command %s in %s\n", args[1], args[0])
 		return
 	}
-
 }
