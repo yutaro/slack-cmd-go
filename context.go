@@ -1,6 +1,8 @@
 package scmd
 
-import "github.com/nlopes/slack"
+import (
+	"github.com/nlopes/slack"
+)
 
 type Context struct {
 	rtm     *slack.RTM
@@ -15,6 +17,8 @@ type Context struct {
 func (c *Context) SendMessage(mes string) {
 	c.rtm.SendMessage(c.rtm.NewOutgoingMessage(mes, c.ev.Channel))
 }
+
+type argStr string
 
 func (c *Context) GetArgs() []string {
 	return c.args
