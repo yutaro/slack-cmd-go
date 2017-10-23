@@ -5,6 +5,7 @@ import "github.com/nlopes/slack"
 type Context struct {
 	rtm     *slack.RTM
 	ev      *slack.MessageEvent
+	bot     *Bot
 	options map[string]string
 	flags   map[string]bool
 	rawArgs []string
