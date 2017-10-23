@@ -46,6 +46,7 @@ func main() {
 }
 
 ```
+![hello](https://i.gyazo.com/276c661ed615951e83f11907b54d8e86.png)
 
 ---
 
@@ -117,6 +118,8 @@ func fibonacci() func() int {
 }
 ```
 
+![calc](https://i.gyazo.com/6c3bd2b40cd1cd7a7e792f23982411ed.png)
+
 ---
 
 ### options
@@ -147,6 +150,8 @@ func main() {
 	bot.Start()
 }
 ```
+
+![options](https://i.gyazo.com/6d8c16edd3680bb394599ff34cc246d7.png)
 
 ## Library
 <https://github.com/nlopes/slack>
