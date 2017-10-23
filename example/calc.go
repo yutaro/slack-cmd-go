@@ -13,7 +13,7 @@ func main() {
 	bot := scmd.New(conf.TOKEN)
 
 	// two phrase command
-	calc := bot.NewCmds("calc")
+	calc := bot.NewCmdGroup("calc")
 
 	calc.Cmd(" ", "wow",
 		func(c *scmd.Context) {
