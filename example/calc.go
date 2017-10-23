@@ -12,19 +12,6 @@ func main() {
 	conf := scmd.LoadToml("config.toml")
 	bot := scmd.New(conf.TOKEN)
 
-	// just one phrase command.
-	// hello => Hello!
-	// hello yutaro => Hello yutaro!
-	bot.OneCmd("hello", "greeting",
-		func(c *scmd.Context) {
-			args := c.GetArgs()
-			if len(args) == 0 {
-				c.SendMessage("Hello!")
-				return
-			}
-			c.SendMessage(fmt.Sprintf("Hello %s!", strings.Join(args, " ")))
-		})
-
 	// two phrase command
 	calc := bot.NewCmds("calc")
 

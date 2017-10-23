@@ -16,8 +16,8 @@ func main() {
 			flags := c.GetFlags()
 			options := c.GetOptions()
 
-			fmt.Println("--- test ---")
-			fmt.Printf("options : %v , flags : %v , args : %v \n", options, flags, args)
+			c.SendMessage("--- test ---")
+			c.SendMessage(fmt.Sprintf("options : %v , flags : %v , args : %v \n", options, flags, args))
 		})
 
 	bot.Start()
