@@ -48,7 +48,7 @@ func (b *Bot) NewCmdGroup(name string) *CmdGroup {
 
 func (b *Bot) OneCmd(name, explain string, callback func(*Context)) {
 	b.Cmds[name] = make(map[string]*Cmd)
-	b.Cmds[name]["help"] = getNewHelp(name)
+	// b.Cmds[name]["help"] = getNewHelp(name)
 	b.Cmds[name][" "] = &Cmd{
 		name:    name,
 		label:   " ",
