@@ -102,6 +102,9 @@ func (b *Bot) evalMes(ev *slack.MessageEvent) {
 	}
 
 	for _, a := range rawArgs {
+		if a == ""{
+			continue
+		}
 		if len(a) < 2 {
 			args = append(args, a)
 			continue
