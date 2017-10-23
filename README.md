@@ -39,6 +39,26 @@ func main() {
 			c.SendMessage(fmt.Sprintf("Hello %s!", strings.Join(args, " ")))
 		})
 
+	bot.Start()
+}
+
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"strconv"
+	"strings"
+
+	"github.com/yutaro/slack-cmd-go"
+)
+
+func main() {
+	conf := scmd.LoadToml("config.toml")
+	bot := scmd.New(conf.TOKEN)
+
 	// two phrase command
 	calc := bot.NewCmds("calc")
 
