@@ -85,7 +85,7 @@ Loop:
 func (b *Bot) evalMes(ev *slack.MessageEvent) {
 	msg := ev.Text
 	rawArgs := strings.Split(msg, " ")
-	args := strings.Split(msg, " ")
+	args := make([]string, 0)
 
 	c := &Context{
 		rtm:     b.rtm,
@@ -95,26 +95,32 @@ func (b *Bot) evalMes(ev *slack.MessageEvent) {
 		flags:   make(map[string]bool),
 	}
 
-	group, ok := b.Cmds[args[0]]
+	group, ok := b.Cmds[rawArgs[0]]
 	if !ok {
 		//fmt.Printf("Not exist command group %s", args[0])
 		return
 	}
 
-	for _, a := range args {
+	for _, a := range rawArgs {
 		if len(a) < 2 {
+			args = append(args, a)
 			continue
 		}
 
-		if a[0:1] == "--" {
+		var dh bool
+		if a[0:2] == "--" {
 			a = a[2:]
+			dh = true
 		} else if a[0] == '-' {
 			a = a[1:]
+			dh = false
 		} else {
+			args = append(args, a)
 			continue
 		}
 
 		if len(a) < 1 {
+			args = append(args, a)
 			continue
 		}
 
@@ -124,8 +130,12 @@ func (b *Bot) evalMes(ev *slack.MessageEvent) {
 			val := strings.Join(vals[1:], "=")
 			c.options[label] = val
 		} else {
-			for _, label := range a {
-				c.flags[label] = true
+			if dh {
+				c.flags[a] = true
+			} else {
+				for _, label := range a {
+					c.flags[string(label)] = true
+				}
 			}
 		}
 	}

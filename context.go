@@ -18,3 +18,11 @@ func (c *Context) SendMessage(mes string) {
 func (c *Context) GetArgs() []string {
 	return c.args
 }
+
+func (c *Context) GetFlags() map[string]bool {
+	return c.flags
+}
+
+func (c *Context) GetOptions() map[string]string {
+	return c.options
+}
