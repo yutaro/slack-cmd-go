@@ -4,13 +4,16 @@ Making slack-bot perseing your messages like cli commands.
 
 ## Usage
 
-install
+### install
 ```sh
 go get -u github.com/yutaro/slack-cmd-go
 ```
 
 
-example
+## examples
+
+
+### hello world
 ```go
 package main
 
@@ -43,6 +46,10 @@ func main() {
 }
 
 ```
+
+---
+
+### calc
 
 ```go
 package main
@@ -109,6 +116,10 @@ func fibonacci() func() int {
 	}
 }
 ```
+
+---
+
+### options
 
 ```go
 package main
