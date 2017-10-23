@@ -158,7 +158,7 @@ func (b *Bot) evalMes(ev *slack.MessageEvent) {
 		cmd.run(c)
 		return
 	} else {
-		fmt.Printf("Not Exist command %s in %s\n", args[1], args[0])
+		fmt.Printf("Not Exist command: %s %s\n", args[0], args[1])
 		return
 	}
 }
