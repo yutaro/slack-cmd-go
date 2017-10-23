@@ -139,3 +139,4 @@ func main() {
 
 ## Library
 <https://github.com/nlopes/slack>
+<https://github.com/BurntSushi/toml>
