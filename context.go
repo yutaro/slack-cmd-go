@@ -18,11 +18,3 @@ func (c *Context) SendMessage(mes string) {
 func (c *Context) GetArgs() []string {
 	return c.args
 }
-
-type Option struct {
-	name    string
-	isFlag  bool
-	flagVal bool
-
-	value string
-}

@@ -91,6 +91,8 @@ func (b *Bot) evalMes(ev *slack.MessageEvent) {
 		rtm:     b.rtm,
 		ev:      ev,
 		rawArgs: rawArgs,
+		options: make(map[string]string),
+		flags:   make(map[string]bool),
 	}
 
 	group, ok := b.Cmds[args[0]]
@@ -100,8 +102,31 @@ func (b *Bot) evalMes(ev *slack.MessageEvent) {
 	}
 
 	for _, a := range args {
-		if a[0] == '-' {
+		if len(a) < 2 {
+			continue
+		}
 
+		if a[0:1] == "--" {
+			a = a[2:]
+		} else if a[0] == '-' {
+			a = a[1:]
+		} else {
+			continue
+		}
+
+		if len(a) < 1 {
+			continue
+		}
+
+		if strings.Contains(a, "=") {
+			vals := strings.Split(a, "=")
+			label := vals[0]
+			val := strings.Join(vals[1:], "=")
+			c.options[label] = val
+		} else {
+			for _, label := range a {
+				c.flags[label] = true
+			}
 		}
 	}
 
