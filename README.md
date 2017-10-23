@@ -10,10 +10,10 @@ go get -u github.com/yutaro/slack-cmd-go
 ```
 
 
-## examples
+## Examples
 
 
-### hello world
+## Hello World
 ```go
 package main
 
@@ -48,9 +48,7 @@ func main() {
 ```
 <img src="https://i.gyazo.com/276c661ed615951e83f11907b54d8e86.png" width="500">
 
----
-
-### calc
+## Calc
 
 ```go
 package main
@@ -120,9 +118,7 @@ func fibonacci() func() int {
 
 <img src="https://i.gyazo.com/6c3bd2b40cd1cd7a7e792f23982411ed.png" width="500">
 
----
-
-### options
+## Options
 
 ```go
 package main
