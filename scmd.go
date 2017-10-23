@@ -102,7 +102,7 @@ func (b *Bot) evalMes(ev *slack.MessageEvent) {
 	}
 
 	for _, a := range rawArgs {
-		if a == ""{
+		if a == "" {
 			continue
 		}
 		if len(a) < 2 {

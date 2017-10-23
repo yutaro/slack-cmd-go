@@ -15,6 +15,11 @@ func main() {
 	// two phrase command
 	calc := bot.NewCmds("calc")
 
+	calc.Cmd(" ", "wow",
+		func(c *scmd.Context) {
+			c.SendMessage("calc is really calc")
+		})
+
 	// calc sum 2 3 => The result is : 5
 	calc.Cmd("sum", "Add two numbers.",
 		func(c *scmd.Context) {
