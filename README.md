@@ -154,5 +154,5 @@ func main() {
 <img src="https://i.gyazo.com/6d8c16edd3680bb394599ff34cc246d7.png" width="500">
 
 ## Library
-<https://github.com/nlopes/slack>
+<https://github.com/nlopes/slack>    
 <https://github.com/BurntSushi/toml>
