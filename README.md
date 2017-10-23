@@ -68,7 +68,7 @@ func main() {
 	bot := scmd.New(conf.TOKEN)
 
 	// two phrase command
-	calc := bot.NewCmds("calc")
+	calc := bot.NewCmdGroup("calc")
 
 	// calc sum 2 3 => The result is : 5
 	calc.Cmd("sum", "Add two numbers.",
