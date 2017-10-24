@@ -1,8 +1,6 @@
 package scmd
 
 import (
-	"fmt"
-
 	"github.com/nlopes/slack"
 )
 
@@ -21,15 +19,13 @@ func (c *Context) SendMessage(mes string) {
 }
 
 func (c *Context) SendFile(mes string) {
-	file, err := c.rtm.UploadFile(slack.FileUploadParameters{
-		Title: mes,
-		File:  mes,
+	c.rtm.UploadFile(slack.FileUploadParameters{
+		Title:    mes,
+		File:     mes,
+		Channels: []string{c.ev.Channel},
 	})
 
-	if err != nil {
-		return
-	}
-	fmt.Println(file)
+	//fmt.Printf("%+v\n", file)
 }
 
 type argStr string
