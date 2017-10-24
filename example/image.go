@@ -10,8 +10,6 @@ func main() {
 
 	bot.OneCmd("image", "upload image", func(c *scmd.Context) {
 		c.SendFile("myaox.jpg")
-
-		//c.SendMessage(path)
 	})
 
 	bot.Start()
