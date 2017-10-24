@@ -9,7 +9,7 @@ func main() {
 	bot := scmd.New(conf.TOKEN)
 
 	bot.OneCmd("image", "upload image", func(c *scmd.Context) {
-		c.SendF
+
 	})
 
 }
