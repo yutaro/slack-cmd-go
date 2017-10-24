@@ -16,7 +16,7 @@ type Bot struct {
 type Cmd struct {
 	name    string
 	label   string
-	explain string
+	explain []string
 	run     func(*Context)
 }
 
@@ -46,7 +46,7 @@ func (b *Bot) NewCmdGroup(name string) *CmdGroup {
 	}
 }
 
-func (b *Bot) OneCmd(name, explain string, callback func(*Context)) {
+func (b *Bot) OneCmd(name string, explain []string, callback func(*Context)) {
 	b.Cmds[name] = make(map[string]*Cmd)
 	// b.Cmds[name]["help"] = getNewHelp(name)
 	b.Cmds[name][" "] = &Cmd{
@@ -57,7 +57,7 @@ func (b *Bot) OneCmd(name, explain string, callback func(*Context)) {
 	}
 }
 
-func (g *CmdGroup) Cmd(label, explain string, callback func(*Context)) {
+func (g *CmdGroup) Cmd(label string, explain []string, callback func(*Context)) {
 	g.Bot.Cmds[g.name][label] = &Cmd{
 		name:    g.name,
 		label:   label,

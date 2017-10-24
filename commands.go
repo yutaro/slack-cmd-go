@@ -11,7 +11,7 @@ func getNewHelp(name string) *Cmd {
 	cmd := &Cmd{
 		name:    name,
 		label:   "help",
-		explain: "show usage.",
+		explain: []string{"show usage."},
 		run: func(c *Context) {
 			c.SendMessage(c.GetHelpMes(name))
 		},
@@ -36,20 +36,29 @@ func (c *Context) GetHelpMes(name string) string {
 	}
 
 	mes := fmt.Sprintf("```\n%s", name)
-	spaces := strings.Repeat(" ", len(name))
+	cmdSpace := strings.Repeat(" ", len(name))
+	labelSpace := strings.Repeat(" ", maxLen)
 	flag := true
 
 	form1 := " %-" + strconv.Itoa(maxLen) + "s : %s"
 	form2 := "\n%s" + form1
+	form3 := "\n%s %s   %s"
+
 	for _, label := range labels {
 		u := commands[label]
-		if flag {
-			mes += fmt.Sprintf(form1, u.label, u.explain)
-			flag = false
-			continue
-		}
+		for i, exp := range u.explain {
+			if flag {
+				mes += fmt.Sprintf(form1, u.label, exp)
+				flag = false
+				continue
+			}
 
-		mes += fmt.Sprintf(form2, spaces, u.label, u.explain)
+			if i == 0 {
+				mes += fmt.Sprintf(form2, cmdSpace, u.label, exp)
+			} else {
+				mes += fmt.Sprintf(form3, cmdSpace, labelSpace, exp)
+			}
+		}
 	}
 	mes += "\n```"
 

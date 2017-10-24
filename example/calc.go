@@ -16,7 +16,7 @@ func main() {
 	calc := bot.NewCmdGroup("calc")
 
 	// calc sum 2 3 => The result is : 5
-	calc.Cmd("sum", "Add two numbers.",
+	calc.Cmd("sum", []string{"Add two numbers.", "calc sum x y => x + y", "-n -- optional"},
 		func(c *scmd.Context) {
 			args := c.GetArgs()
 			x, _ := strconv.Atoi(args[0])
@@ -25,7 +25,7 @@ func main() {
 		})
 
 	// calc sub 5 10 => The result is : -5
-	calc.Cmd("sub", "Sub two numbers.",
+	calc.Cmd("sub", []string{"Sub two numbers."},
 		func(c *scmd.Context) {
 			args := c.GetArgs()
 			x, _ := strconv.Atoi(args[0])
@@ -34,7 +34,7 @@ func main() {
 		})
 
 	// calc fib 5 => The result is : 1 1 2 3 5
-	calc.Cmd("fib", "Show fibonacci numbers.",
+	calc.Cmd("fib", []string{"Show fibonacci numbers."},
 		func(c *scmd.Context) {
 			args := c.GetArgs()
 			x, _ := strconv.Atoi(args[0])
