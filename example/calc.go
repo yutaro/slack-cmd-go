@@ -5,8 +5,6 @@ import (
 	"strconv"
 	"strings"
 
-	. "github.com/spf13/cast"
-
 	"github.com/yutaro/slack-cmd-go"
 )
 
@@ -21,8 +19,8 @@ func main() {
 	calc.Cmd("sum", "Add two numbers.",
 		func(c *scmd.Context) {
 			args := c.GetArgs()
-			x := ToInt(args[0])
-			y := ToInt(args[1])
+			x, _ := strconv.Atoi(args[0])
+			y, _ := strconv.Atoi(args[1])
 			c.SendMessage(fmt.Sprintf("The result is : %d", x+y))
 		})
 
@@ -30,8 +28,8 @@ func main() {
 	calc.Cmd("sub", "Sub two numbers.",
 		func(c *scmd.Context) {
 			args := c.GetArgs()
-			x := ToInt(args[0])
-			y := ToInt(args[1])
+			x, _ := strconv.Atoi(args[0])
+			y, _ := strconv.Atoi(args[1])
 			c.SendMessage(fmt.Sprintf("The result is : %d", x-y))
 		})
 
@@ -39,7 +37,7 @@ func main() {
 	calc.Cmd("fib", "Show fibonacci numbers.",
 		func(c *scmd.Context) {
 			args := c.GetArgs()
-			x := ToInt(args[0])
+			x, _ := strconv.Atoi(args[0])
 
 			nums := make([]string, x)
 			f := fibonacci()
