@@ -146,9 +146,12 @@ func (b *Bot) evalMes(ev *slack.MessageEvent) {
 		}
 	}
 
-	if cmd, ok := group[" "]; ok && len(args) == 1 {
-		c.args = args[1:]
-		cmd.run(c)
+	if len(args) == 1 {
+		if cmd, ok := group[" "]; ok {
+			c.args = args[1:]
+			cmd.run(c)
+			return
+		}
 		return
 	}
 
