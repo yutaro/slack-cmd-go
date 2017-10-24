@@ -1,6 +1,8 @@
 package scmd
 
 import (
+	"fmt"
+
 	"github.com/nlopes/slack"
 )
 
@@ -16,6 +18,18 @@ type Context struct {
 
 func (c *Context) SendMessage(mes string) {
 	c.rtm.SendMessage(c.rtm.NewOutgoingMessage(mes, c.ev.Channel))
+}
+
+func (c *Context) SendFile(mes string) {
+	file, err := c.rtm.UploadFile(&slack.params{
+		Title: mes,
+		File:  mes,
+	})
+
+	if err != nil {
+		return
+	}
+	fmt.Println(file)
 }
 
 type argStr string
