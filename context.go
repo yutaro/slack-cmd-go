@@ -21,7 +21,7 @@ func (c *Context) SendMessage(mes string) {
 }
 
 func (c *Context) SendFile(mes string) {
-	file, err := c.rtm.UploadFile(slack.params{
+	file, err := c.rtm.UploadFile(slack.FileUploadParameters{
 		Title: mes,
 		File:  mes,
 	})
