@@ -10,7 +10,7 @@ func main() {
 	conf := scmd.LoadToml("config.toml")
 	bot := scmd.New(conf.TOKEN)
 
-	bot.OneCmd("test", "test options and flags",
+	bot.OneCmd("test", []string{"test options and flags"},
 		func(c *scmd.Context) {
 			args := c.GetArgs()
 			flags := c.GetFlags()

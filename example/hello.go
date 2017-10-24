@@ -14,7 +14,7 @@ func main() {
 	// just one phrase command.
 	// hello => Hello!
 	// hello yutaro => Hello yutaro!
-	bot.OneCmd("hello", "greeting",
+	bot.OneCmd("hello", []string{"greeting"},
 		func(c *scmd.Context) {
 			args := c.GetArgs()
 			if len(args) == 0 {

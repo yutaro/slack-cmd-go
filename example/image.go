@@ -8,7 +8,7 @@ func main() {
 	conf := scmd.LoadToml("config.toml")
 	bot := scmd.New(conf.TOKEN)
 
-	bot.OneCmd("image", "upload image", func(c *scmd.Context) {
+	bot.OneCmd("image", []string{"upload image"}, func(c *scmd.Context) {
 		c.SendFile("myaox.jpg")
 	})
 
