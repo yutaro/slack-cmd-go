@@ -18,14 +18,18 @@ func (c *Context) SendMessage(mes string) {
 	c.rtm.SendMessage(c.rtm.NewOutgoingMessage(mes, c.ev.Channel))
 }
 
-func (c *Context) SendFile(mes string) {
-	c.rtm.UploadFile(slack.FileUploadParameters{
+func (c *Context) SendFile(mes string) *slack.File {
+	file, err := c.rtm.UploadFile(slack.FileUploadParameters{
 		Title:    mes,
 		File:     mes,
 		Channels: []string{c.ev.Channel},
 	})
 
+	if err != nil {
+		return nil
+	}
 	//fmt.Printf("%+v\n", file)
+	return file
 }
 
 type argStr string
