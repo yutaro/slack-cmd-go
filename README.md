@@ -33,7 +33,7 @@ func main() {
 	// just one phrase command.
 	// hello => Hello!
 	// hello yutaro => Hello yutaro!
-	bot.OneCmd("hello", "greeting",
+	bot.OneCmd("hello", []string{"greeting"},
 		func(c *scmd.Context) {
 			args := c.GetArgs()
 			if len(args) == 0 {
@@ -71,7 +71,7 @@ func main() {
 	calc := bot.NewCmdGroup("calc")
 
 	// calc sum 2 3 => The result is : 5
-	calc.Cmd("sum", "Add two numbers.",
+	calc.Cmd("sum", []string{"Add two numbers.}",
 		func(c *scmd.Context) {
 			args := c.GetArgs()
 			x, _ := strconv.Atoi(args[0])
@@ -80,7 +80,7 @@ func main() {
 		})
 
 	// calc sub 5 10 => The result is : -5
-	calc.Cmd("sub", "Sub two numbers.",
+	calc.Cmd("sub", []string{"Sub two numbers."},
 		func(c *scmd.Context) {
 			args := c.GetArgs()
 			x, _ := strconv.Atoi(args[0])
@@ -89,7 +89,7 @@ func main() {
 		})
 
 	// calc fib 5 => The result is : 1 1 2 3 5
-	calc.Cmd("fib", "Show fibonacci numbers.",
+	calc.Cmd("fib", []string{"Show fibonacci numbers."},
 		func(c *scmd.Context) {
 			args := c.GetArgs()
 			x, _ := strconv.Atoi(args[0])
@@ -135,7 +135,7 @@ func main() {
 	conf := scmd.LoadToml("config.toml")
 	bot := scmd.New(conf.TOKEN)
 
-	bot.OneCmd("test", "test options and flags",
+	bot.OneCmd("test", []string{"test options and flags"},
 		func(c *scmd.Context) {
 			args := c.GetArgs()
 			flags := c.GetFlags()
