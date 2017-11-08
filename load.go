@@ -1,8 +1,8 @@
 package scmd
 
 import (
+	"os"
 	"path"
-	"runtime"
 
 	"github.com/BurntSushi/toml"
 )
@@ -13,8 +13,9 @@ type Config struct {
 
 func LoadToml(confname string) *Config {
 	var conf Config
-	_, cur, _, _ := runtime.Caller(1)
-	confpath := path.Join(path.Dir(cur), confname)
+
+	cur, _ := os.Getwd()
+	confpath := path.Join(cur, confname)
 
 	_, err := toml.DecodeFile(confpath, &conf)
 	if err != nil {
